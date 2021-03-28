@@ -36,50 +36,52 @@ class _MultiContactFormWidgetState extends State<MultiContactFormWidget> {
           onAdd();
         },
       ),
-      body: contactForms.isNotEmpty ? ListView.builder(
-          itemCount: contactForms.length,
-          itemBuilder: (_, index) {
-            return contactForms[index];
-          }) : Center(child: Text("Tap on + to Add Contact")),
+      body: contactForms.isNotEmpty
+          ? ListView.builder(
+              itemCount: contactForms.length,
+              itemBuilder: (_, index) {
+                return contactForms[index];
+              })
+          : Center(child: Text("Tap on + to Add Contact")),
     );
   }
 
   onSave() {
     bool allValid = true;
 
-    contactForms.forEach((element) => allValid = (allValid && element.isValidated()));
+    contactForms
+        .forEach((element) => allValid = (allValid && element.isValidated()));
 
     if (allValid) {
-      List<String> names = contactForms.map((e) => e.contactModel.name).toList();
+      List<String> names =
+          contactForms.map((e) => e.contactModel.name).toList();
       debugPrint("$names");
     } else {
       debugPrint("Form is Not Valid");
     }
   }
 
-  onRemove(ContactModel contact){
+  onRemove(ContactModel contact) {
     setState(() {
-      int index = contactForms.indexWhere((element) => element.contactModel.id == contact.id);
+      int index = contactForms
+          .indexWhere((element) => element.contactModel.id == contact.id);
 
-      if(contactForms != null) contactForms.removeAt(index);
-
+      if (contactForms != null) contactForms.removeAt(index);
     });
-
   }
 
-  onClear(ContactModel contact){
-
+  onClear(ContactModel contact) {
     setState(() {
-      ContactFormItemWidget contactForm = contactForms.firstWhere((element) => element.contactModel.id == contact.id, orElse: ()=> null);
+      ContactFormItemWidget contactForm = contactForms.firstWhere(
+          (element) => element.contactModel.id == contact.id,
+          orElse: () => null);
 
       int index = contactForms.indexOf(contactForm);
 
       debugPrint("$index");
 
       contactForms[index].contactModel = ContactModel();
-
     });
-
   }
 
   onAdd() {
@@ -88,8 +90,8 @@ class _MultiContactFormWidgetState extends State<MultiContactFormWidget> {
       contactForms.add(ContactFormItemWidget(
         index: contactForms.length,
         contactModel: _contactModel,
-        onClear: ()=> onClear(_contactModel),
-        onRemove: ()=> onRemove(_contactModel),
+        onClear: () => onClear(_contactModel),
+        onRemove: () => onRemove(_contactModel),
       ));
     });
   }

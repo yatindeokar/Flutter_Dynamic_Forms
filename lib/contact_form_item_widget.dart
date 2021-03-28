@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:multi_form_app/contact_model.dart';
 
 class ContactFormItemWidget extends StatefulWidget {
-  ContactFormItemWidget({Key key, this.contactModel, this.onRemove, this.onClear, this.index}) : super(key:key);
+  ContactFormItemWidget(
+      {Key key, this.contactModel, this.onRemove, this.onClear, this.index})
+      : super(key: key);
 
   final index;
   ContactModel contactModel;
@@ -50,19 +52,22 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
-                    Text("Contact - ${widget.index}", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.orange),),
-
+                    Text(
+                      "Contact - ${widget.index}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.orange),
+                    ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextButton(
-                            onPressed: (){
+                            onPressed: () {
                               setState(() {
                                 widget.contactModel.name = "";
                                 widget._nameController.clear();
@@ -73,7 +78,7 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                               style: TextStyle(color: Colors.blue),
                             )),
                         TextButton(
-                            onPressed: ()=> widget.onRemove(),
+                            onPressed: () => widget.onRemove(),
                             child: Text(
                               "Remove",
                               style: TextStyle(color: Colors.blue),
@@ -82,14 +87,12 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                     ),
                   ],
                 ),
-
                 TextFormField(
                   controller: widget._nameController,
                   // initialValue: widget.contactModel.name,
                   onChanged: (value) => widget.contactModel.name = value,
                   onSaved: (value) => widget.contactModel.name = value,
-                  validator: (value) =>
-                      value.length > 3 ? null : "Enter Name",
+                  validator: (value) => value.length > 3 ? null : "Enter Name",
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(),
@@ -97,17 +100,15 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                     labelText: "Name",
                   ),
                 ),
-
                 SizedBox(
                   height: 8,
                 ),
-
                 TextFormField(
                   controller: widget._contactController,
                   onChanged: (value) => widget.contactModel.number = value,
                   onSaved: (value) => widget.contactModel.name = value,
                   validator: (value) =>
-                  value.length > 3 ? null : "Enter Number",
+                      value.length > 3 ? null : "Enter Number",
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(),
@@ -115,17 +116,14 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                     labelText: "Number",
                   ),
                 ),
-
                 SizedBox(
                   height: 8,
                 ),
-
                 TextFormField(
                   controller: widget._emailController,
                   onChanged: (value) => widget.contactModel.email = value,
                   onSaved: (value) => widget.contactModel.email = value,
-                  validator: (value) =>
-                  value.length > 3 ? null : "Enter Email",
+                  validator: (value) => value.length > 3 ? null : "Enter Email",
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(),
