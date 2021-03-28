@@ -1,8 +1,8 @@
 ### Dynamic Form in Flutter
 
-This is a demo project to implement Dynamic Forms in Flutter. Preform Add New Form, Validate, Delete and Clear Form Fields action.
+This is a demo project to implement Dynamic Forms in Flutter.and Preform Add New Form, Validate, Delete, Clear Form Fields and Submit actions.
 
-[Visit Medium Article for Details explanation](www.github.com)
+[Visit Medium Article for Detail explanation](www.github.com)
 
 ---
 
