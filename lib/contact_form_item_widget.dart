@@ -127,7 +127,6 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                   controller: widget._emailController,
                   onChanged: (value) => widget.contactModel.email = value,
                   onSaved: (value) => widget.contactModel.email = value,
-                  validator: (value) => (value.isEmpty || !value.contains("@")) ? null : "Enter valid Email",
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(),
