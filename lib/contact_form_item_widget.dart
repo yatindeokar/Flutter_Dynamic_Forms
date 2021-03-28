@@ -4,13 +4,12 @@ import 'package:multi_form_app/contact_model.dart';
 
 class ContactFormItemWidget extends StatefulWidget {
   ContactFormItemWidget(
-      {Key key, this.contactModel, this.onRemove, this.onClear, this.index})
+      {Key key, this.contactModel, this.onRemove, this.index})
       : super(key: key);
 
   final index;
   ContactModel contactModel;
   final Function onRemove;
-  final Function onClear;
   final state = _ContactFormItemWidgetState();
 
   @override
@@ -69,8 +68,13 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                         TextButton(
                             onPressed: () {
                               setState(() {
+                                //Clear All forms Data
                                 widget.contactModel.name = "";
+                                widget.contactModel.number = "";
+                                widget.contactModel.email = "";
                                 widget._nameController.clear();
+                                widget._contactController.clear();
+                                widget._emailController.clear();
                               });
                             },
                             child: Text(
@@ -96,7 +100,7 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(),
-                    hintText: "Name",
+                    hintText: "Enter Name",
                     labelText: "Name",
                   ),
                 ),
@@ -108,11 +112,11 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                   onChanged: (value) => widget.contactModel.number = value,
                   onSaved: (value) => widget.contactModel.name = value,
                   validator: (value) =>
-                      value.length > 3 ? null : "Enter Number",
+                      value.length > 3 ? null : "Number is Not Valid",
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(),
-                    hintText: "Number",
+                    hintText: "Enter Number",
                     labelText: "Number",
                   ),
                 ),
@@ -123,11 +127,11 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
                   controller: widget._emailController,
                   onChanged: (value) => widget.contactModel.email = value,
                   onSaved: (value) => widget.contactModel.email = value,
-                  validator: (value) => value.length > 3 ? null : "Enter Email",
+                  validator: (value) => (value.isEmpty || !value.contains("@")) ? null : "Enter valid Email",
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 12),
                     border: OutlineInputBorder(),
-                    hintText: "Email",
+                    hintText: "Enter Email",
                     labelText: "Email",
                   ),
                 ),
@@ -140,6 +144,7 @@ class _ContactFormItemWidgetState extends State<ContactFormItemWidget> {
   }
 
   bool validate() {
+    //Validate Form Fields
     bool validate = formKey.currentState.validate();
     if (validate) formKey.currentState.save();
     return validate;

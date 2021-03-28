@@ -61,6 +61,7 @@ class _MultiContactFormWidgetState extends State<MultiContactFormWidget> {
     }
   }
 
+  //Delete specific form
   onRemove(ContactModel contact) {
     setState(() {
       int index = contactForms
@@ -70,19 +71,6 @@ class _MultiContactFormWidgetState extends State<MultiContactFormWidget> {
     });
   }
 
-  onClear(ContactModel contact) {
-    setState(() {
-      ContactFormItemWidget contactForm = contactForms.firstWhere(
-          (element) => element.contactModel.id == contact.id,
-          orElse: () => null);
-
-      int index = contactForms.indexOf(contactForm);
-
-      debugPrint("$index");
-
-      contactForms[index].contactModel = ContactModel();
-    });
-  }
 
   onAdd() {
     setState(() {
@@ -90,7 +78,6 @@ class _MultiContactFormWidgetState extends State<MultiContactFormWidget> {
       contactForms.add(ContactFormItemWidget(
         index: contactForms.length,
         contactModel: _contactModel,
-        onClear: () => onClear(_contactModel),
         onRemove: () => onRemove(_contactModel),
       ));
     });
